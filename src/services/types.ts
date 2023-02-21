@@ -60,5 +60,10 @@ export interface ILoginData {
   password: string
 }
 
+export interface ILoginResponse {
+  access_token: string
+  refresh_token: string
+}
+
 export interface IFile {}
 export interface IAddFile {}
