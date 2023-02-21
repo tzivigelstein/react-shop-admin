@@ -1,6 +1,7 @@
-import { FormEvent, useState } from 'react'
+import { FormEvent, useEffect, useState } from 'react'
 import { LockClosedIcon } from '@heroicons/react/solid'
 import useAuth from '@/hooks/useAuth'
+import Alert from './Alert'
 
 interface Data {
   email: string
@@ -8,7 +9,7 @@ interface Data {
 }
 
 export default function LoginPage() {
-  const { user, login } = useAuth()
+  const { user, loading, error, login } = useAuth()
   const [data, setData] = useState<Data>({
     email: '',
     password: ''
@@ -18,8 +19,6 @@ export default function LoginPage() {
     event.preventDefault()
 
     login(data)
-
-    console.log(user)
   }
 
   function handleChange(event: FormEvent<HTMLInputElement>) {
@@ -33,6 +32,7 @@ export default function LoginPage() {
 
   return (
     <>
+      {error !== null && <Alert alert={error} />}
       <div className="min-h-full flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
         <div className="max-w-md w-full space-y-8">
           <div>
